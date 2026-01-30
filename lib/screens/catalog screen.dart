@@ -1,6 +1,7 @@
 
 
 import 'package:exam/models.dart';
+import 'package:exam/screens/cart%20screen.dart';
 import 'package:flutter/material.dart';
 
 class CatalogScreen extends StatelessWidget {
@@ -22,38 +23,47 @@ class CatalogScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding:  EdgeInsets.only(right: 16),
-            child: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Image.asset(
-                  "assets/images/shopping.png",
-                  height: 30,
-                  width: 30,
-                ),
+            padding: EdgeInsets.only(right: 16),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartScreen()),
+                );
+              },
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Image.asset(
+                    "assets/images/shopping.png",
+                    height: 30,
+                    width: 30,
+                  ),
 
-                Positioned(
-                  left: -6,
-                  top: -6,
-                  child: Container(
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      '3',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                  Positioned(
+                    left: -6,
+                    top: -6,
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Text(
+                        '3',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
+
 
 
         ],
@@ -158,20 +168,78 @@ class CatalogScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFF4F4F4),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: ImageIcon(
-                              AssetImage('assets/images/add.png'),
-                              size: 40,
-                              color: Color(0xFF004AAC),
-                            ),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(16),
                           ),
+                        ),
+                        builder: (context) {
+                          return Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
 
-                        ],
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          "Samsung 65-Inch Neo QLED 4K Smart TV",
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text("Added to cart"),
+                                            ImageIcon(AssetImage("assets/images/check.png"),color: Color(0xFF00A81C),)
+                                          ],
+                                        ),
+                                        SizedBox(height: 10),
+                                       Image.asset("assets/images/view.png"),
+                                        SizedBox(height: 16),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("continue shopping",style: TextStyle(fontSize: 20,color: Color(0xFF004AAC)),),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF4F4F4),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: ImageIcon(
+                        AssetImage('assets/images/add.png'),
+                        size: 40,
+                        color: Color(0xFF004AAC),
+                      ),
+                    ),
+                  )
+
+
+                  ],
                       ),
                     ],
                   ),
